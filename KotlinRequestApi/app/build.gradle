@@ -43,7 +43,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
+    //Here is where we integrate 3rd party libs
+
+    //*** RecyclerView ***
     // For control over item selection of both touch and mouse driven selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
+    //*** OKHTTP ***
+    // define a BOM and its version
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
+    //*** GSON ***
+    implementation 'com.google.code.gson:gson:2.8.7'
 }
