@@ -6,14 +6,14 @@ import android.view.View;
 import android.view.ViewGroup
 import android.widget.TextView
 
-class MainAdapter(): RecyclerView.Adapter<CustomViewHolder>() {
+class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder>() {
 
     val itemTitles = listOf("element 1", "element 2", "element 3", "element 4")
     val itemSubitles = listOf("subelement 1", "subelement 2", "subelement 3", "subelement 4")
 
     // numberOfItems
     override fun getItemCount():Int{
-        return itemTitles.size
+        return homeFeed.videos.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -23,8 +23,9 @@ class MainAdapter(): RecyclerView.Adapter<CustomViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val itemTitle = itemTitles.get(position)
-        val itemSubtitle = itemSubitles.get(position)
+        // val itemTitle = itemTitles.get(position)
+        val itemTitle = homeFeed.videos[position].name
+        val itemSubtitle = itemSubitles[position]
         holder.view.findViewById<TextView>(R.id.item_title).text=itemTitle
         holder.view.findViewById<TextView>(R.id.item_subtitle).text=itemSubtitle
     }

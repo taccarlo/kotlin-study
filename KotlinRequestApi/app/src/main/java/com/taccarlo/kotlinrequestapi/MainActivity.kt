@@ -16,10 +16,11 @@ class MainActivity : AppCompatActivity() {
 
         val rView: RecyclerView = findViewById(R.id.recyclerView_main)
             rView.layoutManager = LinearLayoutManager(this)
-            rView.adapter = MainAdapter()
-            fetchJson()
+            //rView.adapter = MainAdapter()
+            fetchJson(rView)
     }
-    fun fetchJson(){
+
+    private fun fetchJson(rView: RecyclerView){
         println("Attempting to fetch JSON")
         val url = "https://api.letsbuildthatapp.com/youtube/home_feed"
         val request = Request.Builder().url(url).build()
@@ -35,6 +36,9 @@ class MainActivity : AppCompatActivity() {
                 println("URL response:$body")
                 val gson = GsonBuilder().create()
                 val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+                runOnUiThread{
+                    rView.adapter = MainAdapter(homeFeed)
+                }
             }
         })
     }
