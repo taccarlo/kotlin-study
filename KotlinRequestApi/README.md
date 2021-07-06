@@ -2,6 +2,8 @@
 
 This project is a Simple example of data request handling done by Carlo Tacchella. 
 
+This project will use MVVM pattern
+
 ## Task 1
 -Define a master detail fragment structure.
 -Transition from master to detail should be animated (candidate could

@@ -1,18 +1,18 @@
 package com.taccarlo.kotlinrequestapi;
 
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 
-class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder>() {
+class MainAdapter(val homeFeed: HomeFeed) : RecyclerView.Adapter<CustomViewHolder>() {
 
     val itemTitles = listOf("element 1", "element 2", "element 3", "element 4")
     val itemSubitles = listOf("subelement 1", "subelement 2", "subelement 3", "subelement 4")
 
     // numberOfItems
-    override fun getItemCount():Int{
+    override fun getItemCount(): Int {
         return homeFeed.videos.count()
     }
 
@@ -26,12 +26,12 @@ class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
         // val itemTitle = itemTitles.get(position)
         val itemTitle = homeFeed.videos[position].name
         val itemSubtitle = itemSubitles[position]
-        holder.view.findViewById<TextView>(R.id.item_title).text=itemTitle
-        holder.view.findViewById<TextView>(R.id.item_subtitle).text=itemSubtitle
+        holder.view.findViewById<TextView>(R.id.item_title).text = itemTitle
+        holder.view.findViewById<TextView>(R.id.item_subtitle).text = itemSubtitle
     }
 
 }
 
-class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view){
+class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
 }
