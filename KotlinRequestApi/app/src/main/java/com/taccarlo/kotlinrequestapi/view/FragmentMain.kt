@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
@@ -56,7 +57,6 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     fun fetchJson( rView: RecyclerView, act: FragmentActivity?) {
         println("Attempting to fetch JSON")
-        //val url = "https://api.letsbuildthatapp.com/youtube/home_feed"
         val url = "https://www.monclergroup.com/wp-json/mobileApp/v1/getPressReleasesDocs"
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
@@ -81,7 +81,12 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showItem(position: Int, listItem: ListItem) {
-
+       // navController!!.navigate()
+        val bundle = bundleOf("itemId" to position.toString(), "itemPassed" to listItem)
+        navController!!.navigate(
+            R.id.action_mainFragment_to_fragmentListElement,
+            bundle
+        )
     }
 
 }

@@ -1,3 +1,8 @@
 package com.taccarlo.kotlinrequestapi.model
 
-class MediaDate(val dateString: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
+class MediaDate(val dateString: String) : Parcelable
