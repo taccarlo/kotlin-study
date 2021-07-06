@@ -1,13 +1,15 @@
-package com.taccarlo.kotlinrequestapi
+package com.taccarlo.kotlinrequestapi.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.GsonBuilder
-import okhttp3.*
-import java.io.IOException
+import com.taccarlo.kotlinrequestapi.R
 
+/**
+ * <i>MainActivity</i> is the Activity where the project starts.
+ * @author Carlo Tacchella
+ * @version 0.0.1
+ * @since 2021-07-06
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

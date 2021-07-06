@@ -1,26 +1,26 @@
-package com.taccarlo.kotlinrequestapi
+package com.taccarlo.kotlinrequestapi.view
 
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import com.taccarlo.kotlinrequestapi.R
+import com.taccarlo.kotlinrequestapi.model.HomeFeed
 import okhttp3.*
 import java.io.IOException
 
-
 /**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * <i>MainFragment</i> is the fragment that shows the response of the HTTP request.
+ * @author Carlo Tacchella
+ * @version 0.0.1
+ * @since 2021-07-06
  */
 class MainFragment : Fragment(), View.OnClickListener {
 
@@ -45,11 +45,6 @@ class MainFragment : Fragment(), View.OnClickListener {
         rView.layoutManager = LinearLayoutManager(this.context)
         //rView.adapter = MainAdapter()
         fetchJson(rView)
-    }
-
-
-    fun onCellClickListener() {
-        Toast.makeText(this.context,"Cell clicked", Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {
@@ -88,10 +83,3 @@ class MainFragment : Fragment(), View.OnClickListener {
 
 
 }
-class HomeFeed(val videos: List<ListItem>)
-class ListItem(
-    val id: Int, val name: String, val link: String, val imageUrl: String, numberOfViews: String,
-    val channel: Channel
-)
-
-class Channel(val name: String, val profileimageUrl: String)

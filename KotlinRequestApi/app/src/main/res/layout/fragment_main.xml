@@ -5,7 +5,7 @@
     android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    tools:context=".view.MainFragment">
 
     <!-- layout_width set to 0 dp to match constraints -->
     <androidx.recyclerview.widget.RecyclerView
