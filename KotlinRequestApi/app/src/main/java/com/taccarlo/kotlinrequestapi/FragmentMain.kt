@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -46,6 +47,11 @@ class MainFragment : Fragment(), View.OnClickListener {
         fetchJson(rView)
     }
 
+
+    fun onCellClickListener() {
+        Toast.makeText(this.context,"Cell clicked", Toast.LENGTH_SHORT).show()
+    }
+
     override fun onClick(v: View?) {
         /*
            when(v!!.id){
@@ -72,7 +78,9 @@ class MainFragment : Fragment(), View.OnClickListener {
                 val gson = GsonBuilder().create()
                 val homeFeed = gson.fromJson(body, HomeFeed::class.java)
                 activity?.runOnUiThread {
-                    rView.adapter = MainAdapter(homeFeed)
+                    rView.adapter = MainAdapter(homeFeed){
+                        position -> println("Salve $position")
+                    }
                 }
             }
         })

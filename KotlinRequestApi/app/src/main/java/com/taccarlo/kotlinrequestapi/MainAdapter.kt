@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class MainAdapter(val homeFeed: HomeFeed, val mainItemClickListener) : RecyclerView.Adapter<CustomViewHolder>() {
+class MainAdapter(val homeFeed: HomeFeed, val listener:(position:Int)->Unit) : RecyclerView.Adapter<CustomViewHolder>() {
 
     val itemTitles = listOf("element 1", "element 2", "element 3", "element 4")
     val itemSubitles = listOf("subelement 1", "subelement 2", "subelement 3", "subelement 4")
@@ -30,7 +30,7 @@ class MainAdapter(val homeFeed: HomeFeed, val mainItemClickListener) : RecyclerV
         holder.view.findViewById<TextView>(R.id.item_title).text = itemTitle
         holder.view.findViewById<TextView>(R.id.item_subtitle).text = itemSubtitle
         holder.itemView.setOnClickListener{
-            println("ciaoooo")
+            listener.invoke(position)
         }
     }
 
