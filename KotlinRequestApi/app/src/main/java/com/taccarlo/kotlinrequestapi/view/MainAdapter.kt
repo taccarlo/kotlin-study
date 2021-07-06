@@ -14,7 +14,8 @@ import com.taccarlo.kotlinrequestapi.model.HomeFeed
  * @version 0.0.1
  * @since 2021-07-06
  */
-class MainAdapter(private val homeFeed: HomeFeed, private val listener:(position:Int)->Unit) : RecyclerView.Adapter<CustomViewHolder>() {
+class MainAdapter(private val homeFeed: HomeFeed, private val listener: (position: Int) -> Unit) :
+    RecyclerView.Adapter<CustomViewHolder>() {
 
     val itemTitles = listOf("element 1", "element 2", "element 3", "element 4")
     val itemSubtitles = listOf("subElement 1", "subElement 2", "subElement 3", "subElement 4")
@@ -36,7 +37,7 @@ class MainAdapter(private val homeFeed: HomeFeed, private val listener:(position
         val itemSubtitle = itemSubtitles[position]
         holder.view.findViewById<TextView>(R.id.item_title).text = itemTitle
         holder.view.findViewById<TextView>(R.id.item_subtitle).text = itemSubtitle
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             listener.invoke(position)
         }
     }

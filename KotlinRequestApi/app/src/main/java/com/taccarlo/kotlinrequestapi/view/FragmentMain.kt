@@ -10,11 +10,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.GsonBuilder
 import com.taccarlo.kotlinrequestapi.R
-import com.taccarlo.kotlinrequestapi.model.HomeFeed
-import okhttp3.*
-import java.io.IOException
+import com.taccarlo.kotlinrequestapi.utility.Requests.fetchJson
 
 /**
  * <i>MainFragment</i> is the fragment that shows the response of the HTTP request.
@@ -24,8 +21,8 @@ import java.io.IOException
  */
 class MainFragment : Fragment(), View.OnClickListener {
 
-    var navController: NavController? = null
-    lateinit var rView: RecyclerView
+    private var navController: NavController? = null
+    private lateinit var rView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +40,7 @@ class MainFragment : Fragment(), View.OnClickListener {
 
         rView = view.findViewById(R.id.recyclerView_main)
         rView.layoutManager = LinearLayoutManager(this.context)
-        //rView.adapter = MainAdapter()
-        fetchJson(rView)
+        fetchJson(rView, activity)
     }
 
     override fun onClick(v: View?) {
@@ -54,31 +50,6 @@ class MainFragment : Fragment(), View.OnClickListener {
                R.id.send_money_btn-> navController!!.navigate(R.id.action_mainFragment_to_chooseRecipientFragment)
                R.id.view_balance_btn-> navController!!.navigate(R.id.action_mainFragment_to_viewBalanceFragment)
            }*/
-    }
-
-    private fun fetchJson(rView: RecyclerView) {
-        println("Attempting to fetch JSON")
-        val url = "https://api.letsbuildthatapp.com/youtube/home_feed"
-        val request = Request.Builder().url(url).build()
-        val client = OkHttpClient()
-        client.newCall(request).enqueue(object : Callback {
-
-            override fun onFailure(call: Call, e: IOException) {
-                println("Failed to execute request")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                println("URL response:$body")
-                val gson = GsonBuilder().create()
-                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
-                activity?.runOnUiThread {
-                    rView.adapter = MainAdapter(homeFeed){
-                        position -> println("Salve $position")
-                    }
-                }
-            }
-        })
     }
 
 
