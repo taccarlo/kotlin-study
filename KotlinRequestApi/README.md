@@ -10,11 +10,11 @@ This project is a Simple example of data request handling done by Carlo Tacchell
 - When an item is selected, show the detail in another fragment with title, date, link and/or a preview of the document.    
 - Create a data model to map the JSON Object from the web service.    
 ## UI/UX:    
-- No specific graphic required, the candidate could adopt his favourite    
-approach to solve the problem -Recommended libraries:    
-- Gson    
-- OkHttp    
-- The use of libraries above is recommended but not mandatory -The use of the library NavigationComponent is mandatory.    
+ - No specific graphic required, the candidate could adopt his favourite approach to solve the problem    
+## Recommended libraries:    
+ - Gson    
+ - OkHttp    
+ - The use of libraries above is recommended but not mandatory -The use of the library NavigationComponent is mandatory.    
 ## WebService URL:    
 https://www.monclergroup.com/wp-json/mobileApp/v1/getPressReleasesDocs    
 Pay attention to the style, how you write the code.    
