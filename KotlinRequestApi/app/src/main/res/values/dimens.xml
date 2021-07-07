@@ -7,4 +7,5 @@
     <dimen name="very_small">16sp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="match_constraints">0dp</dimen>
+    <dimen name="spin_dimension">30dp</dimen>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -34,6 +35,7 @@ class MainFragment : Fragment() {
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
     private lateinit var refreshLayout : SwipeRefreshLayout
+    private lateinit var progressBar : ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +50,11 @@ class MainFragment : Fragment() {
         navController = Navigation.findNavController(view)
         refreshLayout = view.findViewById(R.id.swipe_refresh)
         rView = view.findViewById(R.id.recyclerView_main)
-
+        progressBar = view.findViewById(R.id.loading_bar)
+        progressBar.visibility = View.VISIBLE
 
         rView.layoutManager = LinearLayoutManager(this.context)
         fetchJson(rView, activity)
-
 
         refreshLayout.setOnRefreshListener {
             Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
@@ -75,12 +77,21 @@ class MainFragment : Fragment() {
 
             override fun onFailure(call: Call, e: IOException) {
                 println("Failed to execute request")
+                Toast.makeText(rView.context,R.string.failed_connection, Toast.LENGTH_SHORT).show()
+                hideProgressBar(act)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 manageResponse(rView, act, response)
+                hideProgressBar(act)
             }
         })
+    }
+
+    private fun hideProgressBar(act: FragmentActivity?) {
+        act?.runOnUiThread {
+            progressBar.visibility = View.GONE
+        }
     }
 
     private fun manageResponse(rView: RecyclerView, act: FragmentActivity?, response: Response) {
@@ -89,7 +100,7 @@ class MainFragment : Fragment() {
         println("URL response:$body")
         val gson = GsonBuilder().create()
         val homeFeed = gson.fromJson(body, MainList::class.java)
-        act?.runOnUiThread {
+            act?.runOnUiThread {
 
             val mAdapt = MainAdapter(homeFeed) { position, listItem ->
                 showItem(position, listItem)

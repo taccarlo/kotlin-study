@@ -1,9 +1,12 @@
 package com.taccarlo.kotlinrequestapi.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.taccarlo.kotlinrequestapi.R
@@ -21,11 +24,13 @@ class FragmentListElement : Fragment() {
 
     private lateinit var itemId: String
     private lateinit var listItem: ListItem
+    private lateinit var buttonLink: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         itemId = requireArguments().getString("itemId").toString()
         listItem = requireArguments().getParcelable("itemPassed")!!
+
     }
 
     override fun onCreateView(
@@ -42,6 +47,14 @@ class FragmentListElement : Fragment() {
         view.findViewById<TextView>(R.id.item_title).text = listItem.mediaTitleCustom
         view.findViewById<TextView>(R.id.item_date).text =
             dateConversion(listItem.mediaDate.dateString)
-        view.findViewById<TextView>(R.id.item_url).text = listItem.mediaUrl
+        buttonLink = view.findViewById(R.id.item_url)
+        buttonLink.text = getString(R.string.link_to_pdf)
+
+        buttonLink.setOnClickListener{
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(listItem.mediaUrl)
+            startActivity(openURL)
+        }
+
     }
 }
