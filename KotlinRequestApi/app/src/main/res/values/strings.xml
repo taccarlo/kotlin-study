@@ -3,4 +3,5 @@
     <string name="title_field">title field</string>
     <string name="date_field">date field</string>
     <string name="url_field">url field</string>
+    <string name="refresh">Refresh</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -17,6 +18,7 @@ import com.google.gson.GsonBuilder
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.ListItem
 import com.taccarlo.kotlinrequestapi.model.MainList
+import com.taccarlo.kotlinrequestapi.utility.PullGesture
 import com.taccarlo.kotlinrequestapi.utility.SwipeGesture
 import okhttp3.*
 import java.io.IOException
@@ -27,7 +29,7 @@ import java.io.IOException
  * @version 0.0.1
  * @since 2021-07-06
  */
-class MainFragment() : Fragment() {
+class MainFragment : Fragment() {
 
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
@@ -46,6 +48,30 @@ class MainFragment() : Fragment() {
         rView = view.findViewById(R.id.recyclerView_main)
         rView.layoutManager = LinearLayoutManager(this.context)
         fetchJson(rView, activity)
+
+
+        val swipeGesture = object : PullGesture() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val touchHelper = ItemTouchHelper(swipeGesture)
+        touchHelper.attachToRecyclerView(rView)
+
+/*
+        rView.setOnFlingListener( PullGesture(true) {
+            @Override
+            public void onSwipeDown() {
+                Toast.makeText(MainActivity.this, "swipe down", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSwipeUp() {
+                Toast.makeText(MainActivity.this, "swipe up", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
     }
 
     private fun fetchJson(rView: RecyclerView, act: FragmentActivity?) {
