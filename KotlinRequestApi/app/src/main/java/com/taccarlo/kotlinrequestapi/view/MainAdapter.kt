@@ -17,7 +17,7 @@ import com.taccarlo.kotlinrequestapi.model.MainList
  * @since 2021-07-06
  */
 class MainAdapter(
-    private val mainList: MainList,
+    private var mainList: MainList,
     private val listener: (position: Int, listItem: ListItem) -> Unit
 ) :
     RecyclerView.Adapter<CustomViewHolder>() {
@@ -43,4 +43,8 @@ class MainAdapter(
         }
     }
 
+    fun deleteItem(i:Int){
+        mainList.content.removeAt(i)
+        notifyDataSetChanged()
+    }
 }

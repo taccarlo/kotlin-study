@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.ListItem
 import com.taccarlo.kotlinrequestapi.model.MainList
+import com.taccarlo.kotlinrequestapi.utility.SwipeGesture
 import okhttp3.*
 import java.io.IOException
 
@@ -25,7 +27,7 @@ import java.io.IOException
  * @version 0.0.1
  * @since 2021-07-06
  */
-class MainFragment : Fragment(), View.OnClickListener {
+class MainFragment() : Fragment(), View.OnClickListener {
 
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
@@ -67,17 +69,39 @@ class MainFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                println("URL response:$body")
-                val gson = GsonBuilder().create()
-                val homeFeed = gson.fromJson(body, MainList::class.java)
-                act?.runOnUiThread {
-                    rView.adapter = MainAdapter(homeFeed) { position, listItem ->
-                        showItem(position, listItem)
-                    }
-                }
+                manageResponse(rView, act, response)
             }
         })
+    }
+
+    private fun manageResponse(rView: RecyclerView, act: FragmentActivity?, response: Response) {
+
+        val body = response.body?.string()
+        println("URL response:$body")
+        val gson = GsonBuilder().create()
+        val homeFeed = gson.fromJson(body, MainList::class.java)
+        act?.runOnUiThread {
+
+            val mAdapt = MainAdapter(homeFeed) { position, listItem ->
+                showItem(position, listItem)
+            }
+            rView.adapter = mAdapt
+
+            activateGesture(mAdapt, rView)
+
+        }
+    }
+
+    private fun activateGesture(mAdapt: MainAdapter, rView: RecyclerView) {
+
+        val swipeGesture = object : SwipeGesture(rView.context){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                mAdapt.deleteItem(viewHolder.absoluteAdapterPosition)
+            }
+        }
+
+        val touchHelper = ItemTouchHelper (swipeGesture)
+        touchHelper.attachToRecyclerView(rView)
     }
 
     private fun showItem(position: Int, listItem: ListItem) {

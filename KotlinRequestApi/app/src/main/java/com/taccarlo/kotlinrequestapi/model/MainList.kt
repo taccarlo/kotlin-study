@@ -7,4 +7,4 @@ package com.taccarlo.kotlinrequestapi.model
  * @version 0.0.1
  * @since 2021-07-06
  */
-class MainList(val content: List<ListItem>)
+class MainList(val content: MutableList<ListItem>)
