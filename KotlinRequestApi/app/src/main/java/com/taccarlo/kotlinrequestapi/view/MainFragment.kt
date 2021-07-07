@@ -54,22 +54,13 @@ class MainFragment : Fragment() {
         fetchJson(rView, activity)
 
 
-        /*refreshLayout.setOnRefreshListener {
+        refreshLayout.setOnRefreshListener {
             Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
-            fetchJson(rView, activity)
+            //TODO: improve this point
+            this.activity?.recreate()
+            refreshLayout.isRefreshing = false
 
-        }*/
-
-        refreshLayout.setOnChildScrollUpCallback(object : SwipeRefreshLayout.OnChildScrollUpCallback {
-            override fun canChildScrollUp(parent: SwipeRefreshLayout, child: View?): Boolean {
-
-                Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
-                if (rView != null) {
-                    return rView.canScrollVertically(-1)
-                }
-                return false
-            }
-        })
+        }
 
 
 
@@ -84,12 +75,10 @@ class MainFragment : Fragment() {
 
             override fun onFailure(call: Call, e: IOException) {
                 println("Failed to execute request")
-                refreshLayout.isRefreshing = false
             }
 
             override fun onResponse(call: Call, response: Response) {
                 manageResponse(rView, act, response)
-                refreshLayout.isRefreshing = false
             }
         })
     }
