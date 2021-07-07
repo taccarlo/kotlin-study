@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
 
+    <!-- Pop anim is used for example when a "screen" is popped off the back stack -->
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.taccarlo.kotlinrequestapi.view.MainFragment"
@@ -12,6 +13,10 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_fragmentListElement"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:destination="@id/fragmentListElement" />
     </fragment>
     <fragment
