@@ -43,7 +43,7 @@ class MainAdapter(
         }
     }
 
-    fun deleteItem(i:Int){
+    fun deleteItem(i: Int) {
         mainList.content.removeAt(i)
         notifyDataSetChanged()
     }

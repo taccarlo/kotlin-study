@@ -27,7 +27,7 @@ import java.io.IOException
  * @version 0.0.1
  * @since 2021-07-06
  */
-class MainFragment() : Fragment(), View.OnClickListener {
+class MainFragment() : Fragment() {
 
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
@@ -46,15 +46,6 @@ class MainFragment() : Fragment(), View.OnClickListener {
         rView = view.findViewById(R.id.recyclerView_main)
         rView.layoutManager = LinearLayoutManager(this.context)
         fetchJson(rView, activity)
-    }
-
-    override fun onClick(v: View?) {
-        /*
-           when(v!!.id){
-               R.id.view_transactions_btn-> navController!!.navigate(R.id.action_mainFragment_to_viewTransactionFragment)
-               R.id.send_money_btn-> navController!!.navigate(R.id.action_mainFragment_to_chooseRecipientFragment)
-               R.id.view_balance_btn-> navController!!.navigate(R.id.action_mainFragment_to_viewBalanceFragment)
-           }*/
     }
 
     private fun fetchJson(rView: RecyclerView, act: FragmentActivity?) {
@@ -94,18 +85,17 @@ class MainFragment() : Fragment(), View.OnClickListener {
 
     private fun activateGesture(mAdapt: MainAdapter, rView: RecyclerView) {
 
-        val swipeGesture = object : SwipeGesture(rView.context){
+        val swipeGesture = object : SwipeGesture(rView.context) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 mAdapt.deleteItem(viewHolder.absoluteAdapterPosition)
             }
         }
 
-        val touchHelper = ItemTouchHelper (swipeGesture)
+        val touchHelper = ItemTouchHelper(swipeGesture)
         touchHelper.attachToRecyclerView(rView)
     }
 
     private fun showItem(position: Int, listItem: ListItem) {
-        // navController!!.navigate()
         val bundle = bundleOf("itemId" to position.toString(), "itemPassed" to listItem)
         navController!!.navigate(
             R.id.action_mainFragment_to_fragmentListElement,
