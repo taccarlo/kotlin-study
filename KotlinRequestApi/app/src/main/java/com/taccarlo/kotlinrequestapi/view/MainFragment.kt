@@ -14,11 +14,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.GsonBuilder
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.ListItem
 import com.taccarlo.kotlinrequestapi.model.MainList
-import com.taccarlo.kotlinrequestapi.utility.PullGesture
 import com.taccarlo.kotlinrequestapi.utility.SwipeGesture
 import okhttp3.*
 import java.io.IOException
@@ -33,6 +33,7 @@ class MainFragment : Fragment() {
 
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
+    private lateinit var refreshLayout : SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,32 +46,32 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        refreshLayout = view.findViewById(R.id.swipe_refresh)
         rView = view.findViewById(R.id.recyclerView_main)
+
+
         rView.layoutManager = LinearLayoutManager(this.context)
         fetchJson(rView, activity)
 
 
-        val swipeGesture = object : PullGesture() {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        /*refreshLayout.setOnRefreshListener {
+            Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
+            fetchJson(rView, activity)
+
+        }*/
+
+        refreshLayout.setOnChildScrollUpCallback(object : SwipeRefreshLayout.OnChildScrollUpCallback {
+            override fun canChildScrollUp(parent: SwipeRefreshLayout, child: View?): Boolean {
+
                 Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
+                if (rView != null) {
+                    return rView.canScrollVertically(-1)
+                }
+                return false
             }
-        }
+        })
 
-        val touchHelper = ItemTouchHelper(swipeGesture)
-        touchHelper.attachToRecyclerView(rView)
 
-/*
-        rView.setOnFlingListener( PullGesture(true) {
-            @Override
-            public void onSwipeDown() {
-                Toast.makeText(MainActivity.this, "swipe down", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSwipeUp() {
-                Toast.makeText(MainActivity.this, "swipe up", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
     }
 
@@ -83,10 +84,12 @@ class MainFragment : Fragment() {
 
             override fun onFailure(call: Call, e: IOException) {
                 println("Failed to execute request")
+                refreshLayout.isRefreshing = false
             }
 
             override fun onResponse(call: Call, response: Response) {
                 manageResponse(rView, act, response)
+                refreshLayout.isRefreshing = false
             }
         })
     }
