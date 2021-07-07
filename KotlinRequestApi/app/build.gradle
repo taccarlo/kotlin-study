@@ -82,4 +82,8 @@ dependencies {
 
     //*** SWIPE GESTURE GRAPHIC
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+
+    //*** CARD VIEW
+    implementation 'androidx.cardview:cardview:1.0.0'
+
 }

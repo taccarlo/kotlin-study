@@ -6,4 +6,5 @@
     <string name="refresh">Refresh</string>
     <string name="link_to_pdf">View PDF on Internet</string>
     <string name="failed_connection">Connection problem</string>
+    <string name="item_title">Item title</string>
 </resources>

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="large">40sp</dimen>
-    <dimen name="medium">27sp</dimen>
-    <dimen name="small">18sp</dimen>
+    <dimen name="largeText">40sp</dimen>
+    <dimen name="mediumText">27sp</dimen>
+    <dimen name="smallText">18sp</dimen>
     <dimen name="very_small">16sp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
     <dimen name="match_constraints">0dp</dimen>
     <dimen name="spin_dimension">30dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_height">90dp</dimen>
+    <dimen name="margin_large">30dp</dimen>
 </resources>

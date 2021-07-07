@@ -35,9 +35,7 @@ class MainAdapter(
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = mainList.content[position]
         val itemTitle = item.mediaTitleCustom
-        val itemSubtitle = "ciao"
         holder.view.findViewById<TextView>(R.id.item_title).text = itemTitle
-        holder.view.findViewById<TextView>(R.id.item_subtitle).text = itemSubtitle
         holder.itemView.setOnClickListener {
             listener.invoke(position, item)
         }
