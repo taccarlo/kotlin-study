@@ -50,7 +50,7 @@ class FragmentListElement : Fragment() {
         buttonLink = view.findViewById(R.id.item_url)
         buttonLink.text = getString(R.string.link_to_pdf)
 
-        buttonLink.setOnClickListener{
+        buttonLink.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
             openURL.data = Uri.parse(listItem.mediaUrl)
             startActivity(openURL)

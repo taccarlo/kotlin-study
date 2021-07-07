@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/item_title"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center_horizontal"
         android:text="@string/title_field"
         android:textColor="@android:color/black"
         android:textSize="@dimen/mediumText"
@@ -26,11 +26,11 @@
 
     <TextView
         android:id="@+id/item_date"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center_horizontal"
         android:text="@string/date_field"
         android:textColor="@android:color/black"
         android:textSize="@dimen/mediumText"
@@ -42,11 +42,11 @@
 
     <Button
         android:id="@+id/item_url"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center_horizontal"
         android:text="@string/url_field"
         android:textSize="@dimen/mediumText"
         android:textStyle="bold"

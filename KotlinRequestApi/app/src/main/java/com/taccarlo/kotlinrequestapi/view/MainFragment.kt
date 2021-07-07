@@ -34,8 +34,8 @@ class MainFragment : Fragment() {
 
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
-    private lateinit var refreshLayout : SwipeRefreshLayout
-    private lateinit var progressBar : ProgressBar
+    private lateinit var refreshLayout: SwipeRefreshLayout
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +57,12 @@ class MainFragment : Fragment() {
         fetchJson(rView, activity)
 
         refreshLayout.setOnRefreshListener {
-            Toast.makeText(rView.context,R.string.refresh, Toast.LENGTH_SHORT).show()
+            Toast.makeText(rView.context, R.string.refresh, Toast.LENGTH_SHORT).show()
             //TODO: improve this point
             this.activity?.recreate()
             refreshLayout.isRefreshing = false
 
         }
-
 
 
     }
@@ -77,7 +76,7 @@ class MainFragment : Fragment() {
 
             override fun onFailure(call: Call, e: IOException) {
                 println("Failed to execute request")
-                Toast.makeText(rView.context,R.string.failed_connection, Toast.LENGTH_SHORT).show()
+                Toast.makeText(rView.context, R.string.failed_connection, Toast.LENGTH_SHORT).show()
                 hideProgressBar(act)
             }
 
@@ -100,7 +99,7 @@ class MainFragment : Fragment() {
         println("URL response:$body")
         val gson = GsonBuilder().create()
         val homeFeed = gson.fromJson(body, MainList::class.java)
-            act?.runOnUiThread {
+        act?.runOnUiThread {
 
             val mAdapt = MainAdapter(homeFeed) { position, listItem ->
                 showItem(position, listItem)
