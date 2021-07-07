@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
 import com.taccarlo.kotlinrequestapi.R
-import com.taccarlo.kotlinrequestapi.model.HomeFeed
 import com.taccarlo.kotlinrequestapi.model.ListItem
+import com.taccarlo.kotlinrequestapi.model.MainList
 import okhttp3.*
 import java.io.IOException
 
 /**
- * <i>MainFragment</i> is the fragment that shows the response of the HTTP request.
+ * <i>MainFragment</i> is the fragment that shows the response of the HTTP request on the main page.
  * @author Carlo Tacchella
  * @version 0.0.1
  * @since 2021-07-06
@@ -55,7 +55,7 @@ class MainFragment : Fragment(), View.OnClickListener {
            }*/
     }
 
-    fun fetchJson( rView: RecyclerView, act: FragmentActivity?) {
+    private fun fetchJson(rView: RecyclerView, act: FragmentActivity?) {
         println("Attempting to fetch JSON")
         val url = "https://www.monclergroup.com/wp-json/mobileApp/v1/getPressReleasesDocs"
         val request = Request.Builder().url(url).build()
@@ -70,7 +70,7 @@ class MainFragment : Fragment(), View.OnClickListener {
                 val body = response.body?.string()
                 println("URL response:$body")
                 val gson = GsonBuilder().create()
-                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+                val homeFeed = gson.fromJson(body, MainList::class.java)
                 act?.runOnUiThread {
                     rView.adapter = MainAdapter(homeFeed) { position, listItem ->
                         showItem(position, listItem)
@@ -81,7 +81,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showItem(position: Int, listItem: ListItem) {
-       // navController!!.navigate()
+        // navController!!.navigate()
         val bundle = bundleOf("itemId" to position.toString(), "itemPassed" to listItem)
         navController!!.navigate(
             R.id.action_mainFragment_to_fragmentListElement,

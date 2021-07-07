@@ -9,7 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="com.taccarlo.kotlinrequestapi.view.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_fragmentListElement"
             app:destination="@id/fragmentListElement" />
@@ -19,10 +19,12 @@
         android:name="com.taccarlo.kotlinrequestapi.view.FragmentListElement"
         android:label="FragmentListElement">
 
-        <argument android:name="itemId"
-            android:defaultValue="None"/>
-        <argument android:name="itemPassed"
-            app:argType="com.taccarlo.kotlinrequestapi.model.ListItem"/>
+        <argument
+            android:name="itemId"
+            android:defaultValue="None" />
+        <argument
+            android:name="itemPassed"
+            app:argType="com.taccarlo.kotlinrequestapi.model.ListItem" />
 
     </fragment>
 </navigation>
