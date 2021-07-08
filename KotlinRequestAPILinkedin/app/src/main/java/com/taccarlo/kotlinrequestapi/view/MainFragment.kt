@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -15,9 +17,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.taccarlo.kotlinrequestapi.R
-import com.taccarlo.kotlinrequestapi.model.ListItem
+import com.taccarlo.kotlinrequestapi.model.LinkedinRepository
 import okhttp3.*
 import java.io.IOException
 
@@ -33,6 +36,9 @@ class MainFragment : Fragment() {
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var btnSearch: Button
+    private lateinit var repoName: EditText
+    private lateinit var repoOwner: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,18 +53,32 @@ class MainFragment : Fragment() {
         navController = Navigation.findNavController(view)
         rView = view.findViewById(R.id.recyclerView_main)
         progressBar = view.findViewById(R.id.loading_bar)
-        progressBar.visibility = View.VISIBLE
+        btnSearch = view.findViewById(R.id.btn_search)
+        repoName = view.findViewById(R.id.repo_name)
+        repoOwner = view.findViewById(R.id.repo_owner)
 
+        btnSearch.setOnClickListener{
+            val owner = repoOwner.text
+            val repo = repoName.text
+            if(owner.toString().isNotEmpty() && repo.toString().isNotEmpty()){
+                fetchJson(rView, activity, owner.toString(), repo.toString())
+                owner.clear()
+                repo.clear()
+            }
+            else{
+                Toast.makeText(view.context, "Insert a repo name and a owner", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        progressBar.visibility = View.GONE
         rView.layoutManager = LinearLayoutManager(this.context)
-        fetchJson(rView, activity)
-
-
-
     }
 
-    private fun fetchJson(rView: RecyclerView, act: FragmentActivity?) {
+    private fun fetchJson(rView: RecyclerView, act: FragmentActivity?, owner:String, repo:String) {
         println("Attempting to fetch JSON")
-        val url = "https://api.github.com/repos/immuni-app/immuni/stargazers"
+        /* example of repository:  "https://api.github.com/repos/immuni-app/immuni/stargazers" */
+        showProgressBar(act)
+        val url = "https://api.github.com/repos/$owner/$repo/stargazers"
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
         client.newCall(request).enqueue(object : Callback {
@@ -76,6 +96,11 @@ class MainFragment : Fragment() {
         })
     }
 
+    private fun showProgressBar(act: FragmentActivity?) {
+        act?.runOnUiThread {
+            progressBar.visibility = View.VISIBLE
+        }
+    }
     private fun hideProgressBar(act: FragmentActivity?) {
         act?.runOnUiThread {
             progressBar.visibility = View.GONE
@@ -84,23 +109,31 @@ class MainFragment : Fragment() {
 
     private fun manageResponse(rView: RecyclerView, act: FragmentActivity?, response: Response) {
 
-        val body = response.body?.string()
-        println("URL response:$body")
+        try {
+            val body = response.body?.string()
+            println("URL response:$body")
 
-        val homeFeed: MutableList<ListItem> = Gson().fromJson(body, object : TypeToken<List<ListItem?>?>() {}.type)
 
-        act?.runOnUiThread {
+            val homeFeed: MutableList<LinkedinRepository> =
+                Gson().fromJson(body, object : TypeToken<List<LinkedinRepository?>?>() {}.type)
 
-            val mAdapt = MainAdapter(homeFeed) { position, listItem ->
-                showItem(position, listItem)
+            act?.runOnUiThread {
+
+                val mAdapt = MainAdapter(homeFeed) { position, listItem ->
+                    showItem(position, listItem)
+                }
+                rView.adapter = mAdapt
+
             }
-            rView.adapter = mAdapt
-
+        }catch(e: JsonSyntaxException){
+            act?.runOnUiThread {
+                Toast.makeText(rView.context, "No data found", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun showItem(position: Int, listItem: ListItem) {
-        val bundle = bundleOf("itemId" to position.toString(), "itemPassed" to listItem)
+    private fun showItem(position: Int, linkedinRepository: LinkedinRepository) {
+        val bundle = bundleOf("itemId" to position.toString(), "itemPassed" to linkedinRepository)
         navController!!.navigate(
             R.id.action_mainFragment_to_fragmentListElement,
             bundle

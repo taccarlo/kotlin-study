@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.CustomViewHolder
-import com.taccarlo.kotlinrequestapi.model.ListItem
+import com.taccarlo.kotlinrequestapi.model.LinkedinRepository
 
 /**
  * <i>MainAdapter</i> handles the binding of the <i>item_row.xml</i> layout to the RecyclerView in <i>FragmentMain</i>.
@@ -16,8 +16,8 @@ import com.taccarlo.kotlinrequestapi.model.ListItem
  * @since 2021-07-06
  */
 class MainAdapter(
-    private var mainList: MutableList<ListItem>,
-    private val listener: (position: Int, listItem: ListItem) -> Unit
+    private var mainList: MutableList<LinkedinRepository>,
+    private val listener: (position: Int, linkedinRepository: LinkedinRepository) -> Unit
 ) :
     RecyclerView.Adapter<CustomViewHolder>() {
 
