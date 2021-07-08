@@ -15,5 +15,5 @@ class LinkedinRepository(
     val login: String,
     val id: String,
     val avatar_url: String,
-    val html_url:String
+    val html_url: String
 ) : Parcelable

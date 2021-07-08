@@ -57,16 +57,16 @@ class MainFragment : Fragment() {
         repoName = view.findViewById(R.id.repo_name)
         repoOwner = view.findViewById(R.id.repo_owner)
 
-        btnSearch.setOnClickListener{
+        btnSearch.setOnClickListener {
             val owner = repoOwner.text
             val repo = repoName.text
-            if(owner.toString().isNotEmpty() && repo.toString().isNotEmpty()){
+            if (owner.toString().isNotEmpty() && repo.toString().isNotEmpty()) {
                 fetchJson(rView, activity, owner.toString(), repo.toString())
                 owner.clear()
                 repo.clear()
-            }
-            else{
-                Toast.makeText(view.context, "Insert a repo name and a owner", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(view.context, "Insert a repo name and a owner", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -74,7 +74,12 @@ class MainFragment : Fragment() {
         rView.layoutManager = LinearLayoutManager(this.context)
     }
 
-    private fun fetchJson(rView: RecyclerView, act: FragmentActivity?, owner:String, repo:String) {
+    private fun fetchJson(
+        rView: RecyclerView,
+        act: FragmentActivity?,
+        owner: String,
+        repo: String
+    ) {
         println("Attempting to fetch JSON")
         /* example of repository:  "https://api.github.com/repos/immuni-app/immuni/stargazers" */
         showProgressBar(act)
@@ -101,6 +106,7 @@ class MainFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
         }
     }
+
     private fun hideProgressBar(act: FragmentActivity?) {
         act?.runOnUiThread {
             progressBar.visibility = View.GONE
@@ -125,7 +131,7 @@ class MainFragment : Fragment() {
                 rView.adapter = mAdapt
 
             }
-        }catch(e: JsonSyntaxException){
+        } catch (e: JsonSyntaxException) {
             act?.runOnUiThread {
                 Toast.makeText(rView.context, "No data found", Toast.LENGTH_SHORT).show()
             }

@@ -83,4 +83,7 @@ dependencies {
     //*** CARD VIEW
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    //*** PICASSO
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }

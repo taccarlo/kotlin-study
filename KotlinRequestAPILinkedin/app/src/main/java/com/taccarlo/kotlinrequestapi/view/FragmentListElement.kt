@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.squareup.picasso.Picasso
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.LinkedinRepository
 
@@ -44,9 +46,12 @@ class FragmentListElement : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<TextView>(R.id.item_title).text = linkedinRepository.login
-        view.findViewById<TextView>(R.id.item_date).text =linkedinRepository.id
+        view.findViewById<TextView>(R.id.item_date).text = linkedinRepository.id
         buttonLink = view.findViewById(R.id.item_url)
         buttonLink.text = getString(R.string.link_to_profile)
+
+        val thumbnailImageView = view.findViewById<ImageView>(R.id.profile_pic)
+        Picasso.get().load(linkedinRepository.avatar_url).into(thumbnailImageView)
 
         buttonLink.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)

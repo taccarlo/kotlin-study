@@ -2,13 +2,12 @@
     <string name="app_name">Kotlin Project - Carlo Tacchella</string>
     <string name="title_field">title field</string>
     <string name="date_field">date field</string>
-    <string name="url_field">PDF field</string>
     <string name="refresh">Refresh</string>
-    <string name="link_to_pdf">View PDF on Internet</string>
     <string name="failed_connection">Connection problem</string>
     <string name="item_title">Item title</string>
     <string name="link_to_profile">Link to profile</string>
     <string name="repo_owner">Owner of the repository</string>
     <string name="repo_name">Name of the repository</string>
     <string name="search">Search</string>
+    <string name="url_field">View profile</string>
 </resources>

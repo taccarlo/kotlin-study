@@ -2,8 +2,10 @@ package com.taccarlo.kotlinrequestapi.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.CustomViewHolder
 import com.taccarlo.kotlinrequestapi.model.LinkedinRepository
@@ -38,10 +40,8 @@ class MainAdapter(
         holder.itemView.setOnClickListener {
             listener.invoke(position, item)
         }
+        val thumbnailImageView = holder.view.findViewById<ImageView>(R.id.item_image)
+        Picasso.get().load(item.avatar_url).into(thumbnailImageView)
     }
 
-    fun deleteItem(i: Int) {
-        mainList.removeAt(i)
-        notifyDataSetChanged()
-    }
 }
