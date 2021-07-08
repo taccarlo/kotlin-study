@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.ListItem
-import com.taccarlo.kotlinrequestapi.utility.StringManager.dateConversion
 
 
 /**
@@ -45,14 +44,13 @@ class FragmentListElement : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<TextView>(R.id.item_title).text = listItem.login
-        view.findViewById<TextView>(R.id.item_date).text =
-            dateConversion(listItem.id)
+        view.findViewById<TextView>(R.id.item_date).text =listItem.id
         buttonLink = view.findViewById(R.id.item_url)
         buttonLink.text = getString(R.string.link_to_profile)
 
         buttonLink.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(listItem.url)
+            openURL.data = Uri.parse(listItem.html_url)
             startActivity(openURL)
         }
 

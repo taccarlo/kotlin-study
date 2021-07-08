@@ -12,16 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.ListItem
-import com.taccarlo.kotlinrequestapi.utility.SwipeGesture
 import okhttp3.*
 import java.io.IOException
 
@@ -36,7 +32,6 @@ class MainFragment : Fragment() {
 
     private var navController: NavController? = null
     private lateinit var rView: RecyclerView
-    private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
@@ -91,10 +86,6 @@ class MainFragment : Fragment() {
 
         val body = response.body?.string()
         println("URL response:$body")
-        val gson = GsonBuilder().create()
-
-        /*val homeFeed = gson.fromJson(body, ListItem[]::class.java)//MainList::class.java)
-        val homeFeed: List<ListItem> = gson.fromJson(body, ListItem[]::class.java)*/
 
         val homeFeed: MutableList<ListItem> = Gson().fromJson(body, object : TypeToken<List<ListItem?>?>() {}.type)
 
@@ -105,21 +96,7 @@ class MainFragment : Fragment() {
             }
             rView.adapter = mAdapt
 
-            activateGesture(mAdapt, rView)
-
         }
-    }
-
-    private fun activateGesture(mAdapt: MainAdapter, rView: RecyclerView) {
-
-        val swipeGesture = object : SwipeGesture(rView.context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                mAdapt.deleteItem(viewHolder.absoluteAdapterPosition)
-            }
-        }
-
-        val touchHelper = ItemTouchHelper(swipeGesture)
-        touchHelper.attachToRecyclerView(rView)
     }
 
     private fun showItem(position: Int, listItem: ListItem) {

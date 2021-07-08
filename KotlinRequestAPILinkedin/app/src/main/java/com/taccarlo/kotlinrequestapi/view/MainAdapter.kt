@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.model.CustomViewHolder
 import com.taccarlo.kotlinrequestapi.model.ListItem
-import com.taccarlo.kotlinrequestapi.model.MainList
 
 /**
  * <i>MainAdapter</i> handles the binding of the <i>item_row.xml</i> layout to the RecyclerView in <i>FragmentMain</i>.

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/carView"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/card_height"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_small"
     cardView:cardCornerRadius="@dimen/corner_radius"
     cardView:cardElevation="@dimen/card_elevation">
@@ -28,9 +28,18 @@
             android:textStyle="bold"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.5"
-            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintStart_toEndOf="@+id/item_image"
             cardView:layout_constraintTop_toTopOf="parent"
             tools:text="@string/item_title" />
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toStartOf="@+id/item_title"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
