@@ -17,13 +17,13 @@ import com.taccarlo.kotlinrequestapi.model.MainList
  * @since 2021-07-06
  */
 class MainAdapter(
-    private var mainList: MainList,
+    private var mainList: MutableList<ListItem>,
     private val listener: (position: Int, listItem: ListItem) -> Unit
 ) :
     RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
-        return mainList.content.count()
+        return mainList.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -33,8 +33,8 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val item = mainList.content[position]
-        val itemTitle = item.mediaTitleCustom
+        val item = mainList[position]
+        val itemTitle = item.login
         holder.view.findViewById<TextView>(R.id.item_title).text = itemTitle
         holder.itemView.setOnClickListener {
             listener.invoke(position, item)
@@ -42,7 +42,7 @@ class MainAdapter(
     }
 
     fun deleteItem(i: Int) {
-        mainList.content.removeAt(i)
+        mainList.removeAt(i)
         notifyDataSetChanged()
     }
 }

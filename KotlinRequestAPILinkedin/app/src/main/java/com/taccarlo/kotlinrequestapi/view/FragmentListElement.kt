@@ -44,15 +44,15 @@ class FragmentListElement : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.item_title).text = listItem.mediaTitleCustom
+        view.findViewById<TextView>(R.id.item_title).text = listItem.login
         view.findViewById<TextView>(R.id.item_date).text =
-            dateConversion(listItem.mediaDate.dateString)
+            dateConversion(listItem.id)
         buttonLink = view.findViewById(R.id.item_url)
-        buttonLink.text = getString(R.string.link_to_pdf)
+        buttonLink.text = getString(R.string.link_to_profile)
 
         buttonLink.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(listItem.mediaUrl)
+            openURL.data = Uri.parse(listItem.url)
             startActivity(openURL)
         }
 

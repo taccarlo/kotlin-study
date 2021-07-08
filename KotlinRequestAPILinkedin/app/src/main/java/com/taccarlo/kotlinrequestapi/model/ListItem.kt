@@ -12,6 +12,8 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 class ListItem(
-    val mediaTitleCustom: String, val mediaUrl: String,
-    val mediaDate: MediaDate
+    val login: String,
+    val id: String,
+    val avatar_url: String,
+    val url:String
 ) : Parcelable
