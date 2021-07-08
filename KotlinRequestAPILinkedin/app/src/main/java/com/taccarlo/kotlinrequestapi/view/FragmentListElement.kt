@@ -44,13 +44,12 @@ class FragmentListElement : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val message= "ID: "+linkedinRepository.id
+        val thumbnailImageView = view.findViewById<ImageView>(R.id.profile_pic)
         view.findViewById<TextView>(R.id.item_title).text = linkedinRepository.login
-        view.findViewById<TextView>(R.id.item_date).text = linkedinRepository.id
+        view.findViewById<TextView>(R.id.item_date).text = message
         buttonLink = view.findViewById(R.id.item_url)
         buttonLink.text = getString(R.string.link_to_profile)
-
-        val thumbnailImageView = view.findViewById<ImageView>(R.id.profile_pic)
         Picasso.get().load(linkedinRepository.avatar_url).into(thumbnailImageView)
 
         buttonLink.setOnClickListener {

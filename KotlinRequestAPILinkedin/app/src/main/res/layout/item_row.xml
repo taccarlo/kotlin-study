@@ -22,7 +22,8 @@
             cardView:layout_constraintEnd_toStartOf="@+id/item_title"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="@string/avatar_image" />
 
         <TextView
             android:id="@+id/item_title"

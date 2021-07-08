@@ -80,12 +80,11 @@ class MainFragment : Fragment() {
         owner: String,
         repo: String
     ) {
-        println("Attempting to fetch JSON")
-        /* example of repository:  "https://api.github.com/repos/immuni-app/immuni/stargazers" */
         showProgressBar(act)
         val url = "https://api.github.com/repos/$owner/$repo/stargazers"
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
+        println("Attempting to fetch JSON")
         client.newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {

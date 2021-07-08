@@ -20,11 +20,7 @@ Seleziono il nome del stargazer e ho informazioni sul suo profilo in una finestr
  - Gson    
  - OkHttp    
  - NavigationComponent
-
-
-## WebService URL:    
-https://www.monclergroup.com/wp-json/mobileApp/v1/getPressReleasesDocs    
-Pay attention to the style, how you write the code.    
+   
 ## Screenshots
 ## Screenshot 1
 ![Screenshot 1](./screenshots/img1.jpg)

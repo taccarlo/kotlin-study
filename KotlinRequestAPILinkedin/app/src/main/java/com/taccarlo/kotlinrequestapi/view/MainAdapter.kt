@@ -36,11 +36,12 @@ class MainAdapter(
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = mainList[position]
         val itemTitle = item.login
+        val thumbnailImageView = holder.view.findViewById<ImageView>(R.id.item_image)
+
         holder.view.findViewById<TextView>(R.id.item_title).text = itemTitle
         holder.itemView.setOnClickListener {
             listener.invoke(position, item)
         }
-        val thumbnailImageView = holder.view.findViewById<ImageView>(R.id.item_image)
         Picasso.get().load(item.avatar_url).into(thumbnailImageView)
     }
 
