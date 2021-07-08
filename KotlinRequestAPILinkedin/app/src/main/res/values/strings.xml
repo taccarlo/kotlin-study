@@ -8,4 +8,7 @@
     <string name="failed_connection">Connection problem</string>
     <string name="item_title">Item title</string>
     <string name="link_to_profile">Link to profile</string>
+    <string name="repo_owner">Owner of the repository</string>
+    <string name="repo_name">Name of the repository</string>
+    <string name="search">Search</string>
 </resources>
