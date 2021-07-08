@@ -48,7 +48,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        refreshLayout = view.findViewById(R.id.swipe_refresh)
         rView = view.findViewById(R.id.recyclerView_main)
         progressBar = view.findViewById(R.id.loading_bar)
         progressBar.visibility = View.VISIBLE
@@ -56,13 +55,6 @@ class MainFragment : Fragment() {
         rView.layoutManager = LinearLayoutManager(this.context)
         fetchJson(rView, activity)
 
-        refreshLayout.setOnRefreshListener {
-            Toast.makeText(rView.context, R.string.refresh, Toast.LENGTH_SHORT).show()
-            //TODO: improve this point
-            this.activity?.recreate()
-            refreshLayout.isRefreshing = false
-
-        }
 
 
     }
