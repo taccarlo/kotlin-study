@@ -1,7 +1,5 @@
 # Kotlin request API Project
 
-This project is a Simple example of data request handling done by Carlo Tacchella.     
-
 # Task   
 
 Realizzare un’applicazione Android in Kotlin che permetta di visualizzare l’elenco degli stargazer di un repository su GitHub.       

@@ -26,7 +26,6 @@ class MainAdapter(
     override fun getItemCount(): Int {
         return mainList.count()
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.item_row, parent, false)
