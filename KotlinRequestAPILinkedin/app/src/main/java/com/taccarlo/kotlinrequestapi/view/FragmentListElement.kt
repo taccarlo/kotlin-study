@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
 import com.taccarlo.kotlinrequestapi.R
-import com.taccarlo.kotlinrequestapi.model.LinkedinRepository
+import com.taccarlo.kotlinrequestapi.models.LinkedinRepository
 
 
 /**

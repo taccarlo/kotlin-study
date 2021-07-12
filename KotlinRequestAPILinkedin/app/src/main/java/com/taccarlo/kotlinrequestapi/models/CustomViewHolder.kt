@@ -1,4 +1,4 @@
-package com.taccarlo.kotlinrequestapi.model
+package com.taccarlo.kotlinrequestapi.models
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

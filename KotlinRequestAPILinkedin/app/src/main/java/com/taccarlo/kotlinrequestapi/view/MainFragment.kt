@@ -20,7 +20,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.taccarlo.kotlinrequestapi.R
-import com.taccarlo.kotlinrequestapi.model.LinkedinRepository
+import com.taccarlo.kotlinrequestapi.adapters.MainAdapter
+import com.taccarlo.kotlinrequestapi.models.LinkedinRepository
 import okhttp3.*
 import java.io.IOException
 
