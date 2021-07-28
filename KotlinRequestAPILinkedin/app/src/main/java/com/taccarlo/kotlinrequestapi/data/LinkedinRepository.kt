@@ -1,4 +1,4 @@
-package com.taccarlo.kotlinrequestapi.models
+package com.taccarlo.kotlinrequestapi.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

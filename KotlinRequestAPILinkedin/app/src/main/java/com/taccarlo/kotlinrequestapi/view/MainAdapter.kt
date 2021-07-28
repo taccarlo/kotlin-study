@@ -1,4 +1,4 @@
-package com.taccarlo.kotlinrequestapi.adapters
+package com.taccarlo.kotlinrequestapi.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.taccarlo.kotlinrequestapi.R
-import com.taccarlo.kotlinrequestapi.models.CustomViewHolder
-import com.taccarlo.kotlinrequestapi.models.LinkedinRepository
+import com.taccarlo.kotlinrequestapi.model.CustomViewHolder
+import com.taccarlo.kotlinrequestapi.data.LinkedinRepository
 
 /**
  * <i>MainAdapter</i> handles the binding of the <i>item_row.xml</i> layout to the RecyclerView in <i>FragmentMain</i>.
@@ -26,6 +26,7 @@ class MainAdapter(
     override fun getItemCount(): Int {
         return mainList.count()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.item_row, parent, false)
