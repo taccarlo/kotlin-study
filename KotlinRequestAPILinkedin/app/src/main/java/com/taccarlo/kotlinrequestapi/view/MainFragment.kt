@@ -50,6 +50,16 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupViewModel()
+        setupUI(view)
+    }
+
+    private fun setupViewModel(){
+
+    }
+    private fun setupUI(view: View){
+
         navController = Navigation.findNavController(view)
         rView = view.findViewById(R.id.recyclerView_main)
         progressBar = view.findViewById(R.id.loading_bar)
