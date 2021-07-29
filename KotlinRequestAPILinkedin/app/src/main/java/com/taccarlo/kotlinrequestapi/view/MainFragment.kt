@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +23,7 @@ import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.data.LinkedinRepository
+import com.taccarlo.kotlinrequestapi.viewmodel.MainFragmentViewModel
 import okhttp3.*
 import java.io.IOException
 
@@ -56,8 +59,14 @@ class MainFragment : Fragment() {
     }
 
     private fun setupViewModel(){
-
+        val model: MainFragmentViewModel by viewModels()
+        model.getLinkedinList().observe(this, renderLinkedinList)
     }
+    private val renderLinkedinList = Observer<List<LinkedinRepository>>{
+        //adapter.update(it)
+        val i = 5
+    }
+
     private fun setupUI(view: View){
 
         navController = Navigation.findNavController(view)
@@ -129,12 +138,12 @@ class MainFragment : Fragment() {
             println("URL response:$body")
 
 
-            val homeFeed: MutableList<LinkedinRepository> =
+            val linkedinList: MutableList<LinkedinRepository> =
                 Gson().fromJson(body, object : TypeToken<List<LinkedinRepository?>?>() {}.type)
 
             act?.runOnUiThread {
 
-                val mAdapt = MainAdapter(homeFeed) { position, listItem ->
+                val mAdapt = MainAdapter(linkedinList) { position, listItem ->
                     showItem(position, listItem)
                 }
                 rView.adapter = mAdapt

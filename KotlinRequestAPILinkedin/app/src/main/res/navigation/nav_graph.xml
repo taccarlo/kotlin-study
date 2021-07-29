@@ -29,7 +29,7 @@
             android:defaultValue="None" />
         <argument
             android:name="itemPassed"
-            app:argType="com.taccarlo.kotlinrequestapi.models.LinkedinRepository" />
+            app:argType="com.taccarlo.kotlinrequestapi.data.LinkedinRepository" />
 
     </fragment>
 </navigation>
