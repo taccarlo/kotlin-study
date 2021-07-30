@@ -63,8 +63,8 @@ class MainFragment : Fragment() {
         model.getLinkedinList().observe(this, renderLinkedinList)
     }
     private val renderLinkedinList = Observer<List<LinkedinRepository>>{
-        //adapter.update(it)
-        val i = 5
+        //update list
+        val a=5
     }
 
     private fun setupUI(view: View){
@@ -77,12 +77,12 @@ class MainFragment : Fragment() {
         repoOwner = view.findViewById(R.id.repo_owner)
 
         btnSearch.setOnClickListener {
-            val owner = repoOwner.text
-            val repo = repoName.text
+            val owner = "immuni-app" //repoOwner.text
+            val repo = "immuni" //repoName.text
             if (owner.toString().isNotEmpty() && repo.toString().isNotEmpty()) {
                 fetchJson(rView, activity, owner.toString(), repo.toString())
-                owner.clear()
-                repo.clear()
+                //owner.clear()
+                //repo.clear()
             } else {
                 Toast.makeText(view.context, "Insert a repo name and a owner", Toast.LENGTH_SHORT)
                     .show()
