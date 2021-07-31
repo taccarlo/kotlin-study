@@ -23,7 +23,6 @@ import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.taccarlo.kotlinrequestapi.R
 import com.taccarlo.kotlinrequestapi.data.LinkedinRepository
-import com.taccarlo.kotlinrequestapi.viewmodel.MainFragmentViewModel
 import okhttp3.*
 import java.io.IOException
 
@@ -53,18 +52,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupViewModel()
         setupUI(view)
-    }
-
-    private fun setupViewModel(){
-        val model: MainFragmentViewModel by viewModels()
-        model.getLinkedinList().observe(this, renderLinkedinList)
-    }
-    private val renderLinkedinList = Observer<List<LinkedinRepository>>{
-        //update list
-        val a=5
     }
 
     private fun setupUI(view: View){
@@ -76,13 +64,16 @@ class MainFragment : Fragment() {
         repoName = view.findViewById(R.id.repo_name)
         repoOwner = view.findViewById(R.id.repo_owner)
 
+        // just init the main screen to dev purposes
+        fetchJson(rView, activity, "immuni-app", "immuni")
+
         btnSearch.setOnClickListener {
-            val owner = "immuni-app" //repoOwner.text
-            val repo = "immuni" //repoName.text
+            val owner = repoOwner.text
+            val repo = repoName.text
             if (owner.toString().isNotEmpty() && repo.toString().isNotEmpty()) {
                 fetchJson(rView, activity, owner.toString(), repo.toString())
-                //owner.clear()
-                //repo.clear()
+                owner.clear()
+                repo.clear()
             } else {
                 Toast.makeText(view.context, "Insert a repo name and a owner", Toast.LENGTH_SHORT)
                     .show()
